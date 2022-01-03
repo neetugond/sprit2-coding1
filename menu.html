@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .image {
+        width: 250px;
+      }
+   
+    </style>
+  </head>
+  <body>
+    <h1>Menu</h1>
+    <div id="main_div"></div>
+
+  </body>
+</html>
+<script>
+  let url = "https://www.themealdb.com/api/json/v1/1/search.php?f=a";
+  var main_div = document.getElementById("main_div");
+
+  async function getmeals() {
+    try {
+      let res = await fetch(url);
+      // console.log('res:', res);
+      let data = await res.json();
+      //    let users = data.data;
+      apppendmeals(data);
+      console.log("data:", data);
+    } catch (err) {
+      console.log("err:", err);
+    }
+  }
+  getmeals();
+
+
+  function apppendmeals(meal) {
+      let div = document.createElement("div");
+
+      let img1 = document.createElement("img");
+      img1.src = meal.meals[0].strMealThumb;
+      img1.setAttribute("class", "image");
+
+      let name1 = document.createElement("p");
+      name1.innerText = meal.meals[0].strMeal;
+
+      let price1 = document.createElement("p");
+      price1.innerText=`Price = ${Math.floor(Math.random()*500) +100}`;
+
+      let btn1 = document.createElement("button");
+      btn1.textContent="Add to Cart"
+
+      let btn2 = document.createElement("button")
+      btn2.textContent="Add to Cart"
+
+      
+      let price2 = document.createElement("p");
+      price2.innerText=`Price = ${Math.floor(Math.random()*500) +100}`;
+   
+
+      let img2 = document.createElement("img");
+      img2.src = meal.meals[1].strMealThumb;
+      img2.setAttribute("class", "image");
+
+      let name2 = document.createElement("p");
+      name2.innerText = meal.meals[0].strMeal;
+
+      div.append(img1, name1,btn1, price1,  img2, name2, price2, btn2);
+      main_div.append(div);
+    
+  }
+
+ 
+</script>
